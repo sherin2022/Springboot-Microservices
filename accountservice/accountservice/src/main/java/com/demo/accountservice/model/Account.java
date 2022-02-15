@@ -3,13 +3,13 @@ package com.demo.accountservice.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+
+
 
 @Entity
-@Data
 @Table(name="accounts")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Account {
@@ -18,11 +18,13 @@ public class Account {
     private Integer accountId;
     private Long accountNumber;
     private String accountType;
-    private String accountBalance;
+    private Long accountBalance;
+    private Integer customerId;
 
-    public Account(Long accountNumber, String accountType, String accountBalance) {
+    public Account(Long accountNumber, String accountType, Long accountBalance, Integer customerId) {
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.accountBalance = accountBalance;
+        this.customerId = customerId;
     }
 }
