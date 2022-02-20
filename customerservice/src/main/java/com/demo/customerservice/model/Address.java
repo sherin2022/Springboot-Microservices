@@ -9,17 +9,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class Address {
 
-    @Id
-    private String id;
 
-    private Integer customerId;
+
+    private int customerId;
     private Integer houseNumber;
     private String houseStreet;
     private String city;
     private String state;
     private Integer pincode;
 
-    public Address(Integer customerId, Integer houseNumber, String houseStreet, String city, String state, Integer pincode) {
+    public Address(int customerId, Integer houseNumber, String houseStreet, String city, String state, Integer pincode) {
         this.customerId= customerId;
         this.houseNumber = houseNumber;
         this.houseStreet = houseStreet;

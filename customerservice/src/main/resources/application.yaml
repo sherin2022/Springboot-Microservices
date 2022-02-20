@@ -5,6 +5,7 @@ eureka:
   instance:
     preferIpAddress: true
     hostname: localhost
+      fetchRegistry=true :
 spring:
   application:
     name: customerservice
@@ -13,11 +14,15 @@ spring:
       enabled: true
   data:
     mongobd:
-      database: customerdb
+      database: customerDB
       port: 27017
 server:
-  port: 8070
-
+  port: 8075
+management :
+  endpoints :
+    web :
+      exposure :
+        include : "*"
 
 
 

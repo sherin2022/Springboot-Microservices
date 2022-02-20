@@ -1,15 +1,17 @@
 package com.demo.customerservice.service;
 
+import com.demo.customerservice.model.Account;
 import com.demo.customerservice.model.Customer;
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface CustomerService {
 
     Customer addCustomer(Customer customer);
-    Customer getAllCustomers(Integer id);
-    public List<Customer> getCustomer();
-
+    List<Customer> getAllCustomers();
+    Optional<Customer> getCustomerById(Integer id);
+    int deleteCustomer(Integer id);
 }

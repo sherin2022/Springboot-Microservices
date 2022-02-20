@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CustomerRepo extends MongoRepository<Customer,String> {
+public interface CustomerRepo extends MongoRepository<Customer, Integer> {
 
     Optional<Customer> findByCustomerId(Integer customerId);
 
