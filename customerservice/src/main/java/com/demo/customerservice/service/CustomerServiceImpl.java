@@ -1,32 +1,43 @@
 package com.demo.customerservice.service;
 
-import com.demo.customerservice.model.Account;
-import com.demo.customerservice.model.Address;
-import com.demo.customerservice.model.Customer;
-import com.demo.customerservice.repo.AddressRepo;
+import com.demo.customerservice.exception.CustomerFeignException;
+import com.demo.customerservice.feign.AccountFeignClient;
+import com.demo.customerservice.model.*;
 import com.demo.customerservice.repo.CustomerRepo;
+import com.netflix.hystrix.exception.HystrixRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.util.ClassUtils.isPresent;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-//    @Autowired
-//    RestTemplate restTemplate;
+    @Autowired
+    CustomerRepo customerRepo;
 
-     @Autowired
-     CustomerRepo customerRepo;
-
-     @Autowired
-     AddressRepo addressRepo;
+    @Autowired
+    AccountFeignClient accountFeignClient;
 
     @Override
-    public Customer addCustomer(Customer customer) {
-        return customerRepo.save(new Customer(customer.getCustomerId(),customer.getName(),customer.getAadharNumber(),addressRepo.save(new Address(customer.getCustomerId(),customer.getAddress().getHouseNumber(),customer.getAddress().getHouseStreet(),customer.getAddress().getCity(),customer.getAddress().getState(),customer.getAddress().getPincode())),customer.getCreateDate(),customer.getLastUpdateDate(),customer.getIsCustomerActive()));
+    public CustomerAccount addCustomer(CustomerAccount customerRecord) {
+        Customer newCustomer = customerRecord.getCustomer_model();
+        newCustomer.setIsCustomerActive(true);                //customer is active now
+        Account newAccount = customerRecord.getAccount_model();
+        newAccount.setCustomerId(newCustomer.getCustomerId());   //passing customer id value
+        newAccount.setIsAccountActive(true);                     //account is active now
+        Account newAccountAllData= accountFeignClient.addAccount(newAccount); //passing account to accountservice
+        LocalDateTime customerCreationDate = LocalDateTime.now();
+        Customer newCustomerAllData = new Customer(newCustomer.getCustomerId(),newCustomer.getName(),newCustomer.getAadharNumber(),newCustomer.getAddress(),newCustomer.getPhoneNumber(),customerCreationDate,LocalDateTime.now(),newCustomer.getAccountHolderType(),newCustomer.getIsCustomerActive());
+        customerRepo.save(newCustomerAllData);
+        customerRecord.setCustomer_model(newCustomerAllData);
+        customerRecord.setAccount_model(newAccountAllData);
+        return customerRecord;
     }
 
     @Override
@@ -35,26 +46,56 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Optional<Customer> getCustomerById(Integer id) {
+    public Optional<Customer> getCustomerById(BigInteger id) {
 
-        return customerRepo.findByCustomerId(id);
+        return customerRepo.findById(id);
     }
 
     @Override
-    public int deleteCustomer(Integer id) {
-        Optional<Customer> customerToBeDeleted = customerRepo.findByCustomerId(id);
-        if(customerToBeDeleted.isPresent()) {
-            Customer updateCustomer = customerToBeDeleted.get();
-            updateCustomer.setIsCustomerActive(false);
-            customerRepo.save(updateCustomer);
-            return customerToBeDeleted.get().getCustomerId();
+    public String deleteCustomer(BigInteger id) {
+        try {
+            Optional<Customer> customer = customerRepo.findById(id);
+            customer.get().setIsCustomerActive(accountFeignClient.deleteAccount(id));
+            customerRepo.save(customer.get());  // will update the customer active state and the last update date.
+            return "Customer " + id + " is deactivated";
+        } catch (HystrixRuntimeException e) {
+            throw new CustomerFeignException("Account Application Not Responding");
         }
-        else
-            return 0;
+     }
+
+        @Override
+        public Boolean isCustomerPresent(BigInteger customerId) {
+        Optional<Customer> customer = customerRepo.findById(customerId);
+        if(customer.isPresent()) { //If no record is found,null value is returned.
+            return customer.get().getIsCustomerActive();
+        }
+        return false;
     }
 
+    @Override
+    public CustomerAllAccount getAllCustomerDataById(BigInteger id) {
+        Optional<Customer> customerBio = customerRepo.findById(id);
+        List<Account> accountData = accountFeignClient.getAccountsByCustomerId(id);
+        //Doubt to ask Mansi. Should I rather autowire this content?
+//        CustomerAllAccount customerAllAccount= new CustomerAllAccount();
+//        customerAllAccount.setCustomerBio(customerData);
+//        customerAllAccount.setAccountList(accountData);
+
+        return new CustomerAllAccount(customerBio.get(),accountData);
 
 
+    }
+
+    @Override
+    public Customer updateCustomer(BigInteger customerId, CustomerUpdatableData customerUpdatableData) {
+        Optional<Customer> customerToBeUpdated = customerRepo.findById(customerId);
+        customerToBeUpdated.get().setAddress(customerUpdatableData.getAddress());
+        customerToBeUpdated.get().setPhoneNumber(customerUpdatableData.getPhoneNumber());
+        customerToBeUpdated.get().setLastUpdateDate(LocalDateTime.now());
+
+        return customerRepo.save(customerToBeUpdated.get());
+
+    }
 
 
 //    @Override

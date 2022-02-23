@@ -5,7 +5,7 @@ import com.demo.accountservice.repo.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +21,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account createAccount(Account account) {
-       return accountRepo.save(account);
+        account.setIsAccountActive(true);
+        return accountRepo.save(new Account(account.getAccountNumber(),account.getAccountBalance(),account.getCustomerId(),account.getAccountType(),account.getIsAccountActive()));
     }
 
     @Override
-    public List<Account> getAllAccountDetails(Integer customerId) {
+    public List<Account> getAllAccountDetails(BigInteger customerId) {
 
-        List<Account> accountDetails = accountRepo.findAccountByCustomerId(customerId);
-            return accountDetails;
+        return accountRepo.findAccountByCustomerId(customerId);
+
     }
 
     @Override
@@ -41,22 +42,26 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account deleteAccount(Integer accId) {
-        Optional<Account> accountToBeDeleted = accountRepo.findById(accId);
-        accountToBeDeleted.get().setIsAccountActive(false);
-        return accountToBeDeleted.get();
+    public Boolean isAccountActive(BigInteger custId) {
+        List<Account> accountActive = accountRepo.findAccountByCustomerId(custId);
+        int countofActiveAccounts =0;
+        for(Account account: accountActive){
+            if(Boolean.TRUE.equals(account.getIsAccountActive()))
+                countofActiveAccounts++;
+        }
+        if(countofActiveAccounts>0) return true;
+        else return false;
 
     }
 
-  //  @Override
-//    public List<Account> deleteAllAccounts(Integer custId) {
-//        List<Account> accountsToBeDeleted = accountRepo.findAllById(custId);
-//        for (Account account : accountsToBeDeleted) {
-//            account.setIsAccountActive(false);
-//        }
-//        return accountsToBeDeleted;
-
-  //  }
+    @Override
+    public void deleteAccount(BigInteger custId) {
+        List<Account> accountToBeDeleted = accountRepo.findAccountByCustomerId(custId);
+        for(Account account: accountToBeDeleted){
+            account.setIsAccountActive(false);
+            accountRepo.save(account);
+        }
+    }
 
 
 }

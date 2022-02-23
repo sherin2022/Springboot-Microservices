@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class  CustomerAccount {
+public class CustomerAllAccount {
 
-
-    private Customer customer_model;
-    private Account account_model;
-
+    Customer customerBio;
+    List<Account> accountList;
 }

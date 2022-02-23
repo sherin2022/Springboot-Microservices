@@ -4,13 +4,11 @@ import com.demo.customerservice.model.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface CustomerRepo extends MongoRepository<Customer, Integer> {
-
-    Optional<Customer> findByCustomerId(Integer customerId);
+public interface CustomerRepo extends MongoRepository<Customer, BigInteger> {
 
     @Override
     List<Customer> findAll();

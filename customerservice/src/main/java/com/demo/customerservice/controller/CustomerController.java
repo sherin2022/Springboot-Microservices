@@ -1,9 +1,11 @@
 package com.demo.customerservice.controller;
 
-import com.demo.customerservice.feign.AccountFeignClient;
-import com.demo.customerservice.model.Account;
+import com.demo.customerservice.exception.CustomerExistsException;
+import com.demo.customerservice.exception.CustomerNotFoundException;
 import com.demo.customerservice.model.Customer;
 import com.demo.customerservice.model.CustomerAccount;
+import com.demo.customerservice.model.CustomerAllAccount;
+import com.demo.customerservice.model.CustomerUpdatableData;
 import com.demo.customerservice.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,88 +14,67 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.ws.rs.Path;
+import java.math.BigInteger;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @Slf4j
-@RequestMapping("/customers")
+@RequestMapping("/personal-banking")
 public class CustomerController {
 
-    @Autowired
-    AccountFeignClient accountFeignClient;
+
 
     @Autowired
     private CustomerService customerService;
 
-    //To access all the customer records
-    @GetMapping("getcustomerinfo")
+    //To make a customer entry and account creation. Test case verified
+    @PostMapping("/customer-new")
+    public ResponseEntity<CustomerAccount> addCustomerAccountData(@Valid @RequestBody CustomerAccount customerAccount){
+        BigInteger customerId = customerAccount.getCustomer_model().getCustomerId(); //Get the new customer id.
+        if(Boolean.TRUE.equals(customerService.isCustomerPresent(customerId))){
+            throw new CustomerExistsException("Duplicate Entry for customer: " +customerId);
+        }
+        return new ResponseEntity<>(customerService.addCustomer(customerAccount),HttpStatus.CREATED);
+
+    }
+
+    //To access all the customer records. Test case verified.
+    @GetMapping("customers")
     public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
 
-    //To access the account information of a particular accountId
-    @GetMapping("accountdetails/{id}")
-    public Account getAccountFeignClient(@PathVariable Integer id) {
-        return accountFeignClient.getAccountsByCustomerId(id);
-    }
+    //To access customer information of a particular with all the account informations of a customer.
+    //Test case verified.
+    @GetMapping("/customer/{id}")
+    public ResponseEntity<CustomerAllAccount> getCustomers(@PathVariable("id") BigInteger id){
+       if(Boolean.FALSE.equals(customerService.isCustomerPresent(id)))
+           throw new CustomerNotFoundException("Customer not Found"+ id);
+       return new ResponseEntity<>(customerService.getAllCustomerDataById(id),HttpStatus.FOUND);
 
-    //To access customer information of a particular customerId
-    @GetMapping("/getcustomerinfo/{id}")
-    public ResponseEntity<Optional<Customer>> getCustomers(@PathVariable("id") Integer id){
-        Optional<Customer> customer1 = customerService.getCustomerById(id);
-        return new ResponseEntity<Optional<Customer>>(customer1, HttpStatus.CREATED);
 
     }
 
+    //To delete a customer/ make the customer inactive // Test case verified.
+    @DeleteMapping("/customer-delete/{id}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable("id") BigInteger id ){
+        if(Boolean.FALSE.equals(customerService.isCustomerPresent(id)))
 
-    //To access information of a customer and the customers different accounts.
-    @GetMapping("/getcustomerallaccountinfo/{id}")
-    public ResponseEntity<CustomerAccount> getAllCustomerAccountData(@PathVariable("id") Integer id){
-      CustomerAccount customerAccount =new CustomerAccount();
-      Optional<Customer> customer = customerService.getCustomerById(id);
-      customerAccount.setCustomer_model(customer.get());
-      Account account = accountFeignClient.getAccountsByCustomerId(id);
-      customerAccount.setAccount_model(account);
-      return new ResponseEntity<CustomerAccount>(customerAccount,HttpStatus.OK);
+            throw new CustomerNotFoundException("Customer Entry Not Found" + id);
+
+        return new ResponseEntity<>(customerService.deleteCustomer(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/customer-update/{customerId}")
+    public ResponseEntity<Customer> updateCustomerDetails(@PathVariable("customerId") BigInteger customerId, @Valid @RequestBody CustomerUpdatableData customerToBeUpdated){//only specific objects in the DTO object can be updated for a customer
+        if(Boolean.FALSE.equals(customerService.isCustomerPresent(customerId)))
+        {
+            throw new CustomerNotFoundException("Customer "+customerId +" do not exist.");
+        }
+        return new ResponseEntity<>(customerService.updateCustomer(customerId,customerToBeUpdated), HttpStatus.OK);
+    }
 
     }
 
-    //To make a customer entry and account creation.
-    @PostMapping("/addnewcustomer")
-    public ResponseEntity<CustomerAccount> addCustomerAccountData(@Valid @RequestBody CustomerAccount customerAccount){
 
-        Customer newCustomer = customerService.addCustomer(customerAccount.getCustomer_model());
-        int newCustomerId = customerAccount.getCustomer_model().getCustomerId();
-        customerAccount.getAccount_model().setCustomerId(newCustomerId);
-        accountFeignClient.addAccount(customerAccount.getAccount_model());
 
-        return new ResponseEntity<CustomerAccount>(customerAccount,HttpStatus.CREATED);
-
-    }
-
-    //To make create an account for an existing customer
-    @PostMapping("/opennewaccount")
-    public ResponseEntity<Account> createNewAccount(@Valid @RequestBody Account newAccount ){
-        accountFeignClient.addNewAccount(newAccount);
-        return new ResponseEntity<Account>(newAccount,HttpStatus.CREATED);
-    }
-
-    //To delete a customer/ make the customer inactive
-    @DeleteMapping("/deletecustomer/{id}")
-    public ResponseEntity<Integer> DeleteCustomer(@PathVariable("id") Integer id ){
-        int deletedId = customerService.deleteCustomer(id);
-//        accountFeignClient.deleteAllAccounts(id);
-        return new ResponseEntity<Integer>(deletedId,HttpStatus.OK);
-
-    }
-
-    //To delete the account of a customer/ make the account inactive.
-    @DeleteMapping("/deleteaccount/{accId}")
-    public ResponseEntity<Account> DeleteAccount(@PathVariable Integer accId){
-        Account deletedAccount = accountFeignClient.deleteAccount(accId);
-        return new ResponseEntity<Account>(deletedAccount,HttpStatus.OK);
-    }
-
-}
