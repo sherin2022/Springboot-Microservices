@@ -1,0 +1,7 @@
+com\demo\accountservice\repo\AccountRepo.class
+com\demo\accountservice\service\AccountService.class
+com\demo\accountservice\AccountserviceApplication.class
+com\demo\accountservice\model\AccountType.class
+com\demo\accountservice\controller\AccountController.class
+com\demo\accountservice\service\AccountServiceImpl.class
+com\demo\accountservice\model\Account.class
