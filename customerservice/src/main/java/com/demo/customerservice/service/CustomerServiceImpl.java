@@ -5,6 +5,8 @@ import com.demo.customerservice.feign.AccountFeignClient;
 import com.demo.customerservice.model.*;
 import com.demo.customerservice.repo.CustomerRepo;
 import com.netflix.hystrix.exception.HystrixRuntimeException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import static org.springframework.util.ClassUtils.isPresent;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+    private static Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
+
     @Autowired
     CustomerRepo customerRepo;
 
@@ -26,6 +30,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerAccount addCustomer(CustomerAccount customerRecord) {
+
+        log.info("Making a customer Entry...!");
         Customer newCustomer = customerRecord.getCustomer_model();
         newCustomer.setIsCustomerActive(true);                //customer is active now
         Account newAccount = customerRecord.getAccount_model();
@@ -42,18 +48,23 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getAllCustomers() {
+
+        log.info("Retrieving all Customer Records");
         return customerRepo.findAll();
     }
 
     @Override
     public Optional<Customer> getCustomerById(BigInteger id) {
 
+        log.info("Entry for customer Id:",id);
         return customerRepo.findById(id);
     }
 
     @Override
     public String deleteCustomer(BigInteger id) {
         try {
+
+            log.info("Deactivating Customer id "+id);
             Optional<Customer> customer = customerRepo.findById(id);
             customer.get().setIsCustomerActive(accountFeignClient.deleteAccount(id));
             customerRepo.save(customer.get());  // will update the customer active state and the last update date.
@@ -74,6 +85,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerAllAccount getAllCustomerDataById(BigInteger id) {
+
+        log.info("Retrieving customer and account information for :",id);
         Optional<Customer> customerBio = customerRepo.findById(id);
         List<Account> accountData = accountFeignClient.getAccountsByCustomerId(id);
         //Doubt to ask Mansi. Should I rather autowire this content?
@@ -88,6 +101,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updateCustomer(BigInteger customerId, CustomerUpdatableData customerUpdatableData) {
+
+        log.info("Updating customer information for: ",customerId);
         Optional<Customer> customerToBeUpdated = customerRepo.findById(customerId);
         customerToBeUpdated.get().setAddress(customerUpdatableData.getAddress());
         customerToBeUpdated.get().setPhoneNumber(customerUpdatableData.getPhoneNumber());

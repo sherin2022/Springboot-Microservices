@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.math.BigInteger;
 import java.util.List;
-
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 @RestController
 @Slf4j
 @RequestMapping("/personal-banking")
 public class CustomerController {
-
 
 
     @Autowired

@@ -2,6 +2,8 @@ package com.demo.accountservice.service;
 
 import com.demo.accountservice.model.Account;
 import com.demo.accountservice.repo.AccountRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ import java.util.Optional;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-
+    private static Logger log = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     @Autowired
     AccountRepo accountRepo;
@@ -21,6 +23,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account createAccount(Account account) {
+        log.info("Account created");
         account.setIsAccountActive(true);
         return accountRepo.save(new Account(account.getAccountNumber(),account.getAccountBalance(),account.getCustomerId(),account.getAccountType(),account.getIsAccountActive()));
     }

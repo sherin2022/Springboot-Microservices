@@ -23,6 +23,9 @@ management :
     web :
       exposure :
         include : "*"
-
-
+logging :
+  level:
+    root: INFO
+  file :
+    name : C:\Users\sherinj\Documents\Springboot-Projects\week2-microservices\logs\customerservice.log
 
