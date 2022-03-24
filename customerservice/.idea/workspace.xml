@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="661d4462-4a9b-4f6d-8351-f191328bfe46" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../like-service/src/main/java/com/example/demo/dto/LikeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/example/demo/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/example/demo/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/sonarlint/issuestore/1/f/1fee4d6b6cb9f5b5c3bb140b984f392dc3537286" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/sonarlint/issuestore/4/6/462a193a912973363f5eed1778cbf4226620dd3b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/sonarlint/issuestore/b/b/bb37021b1c7da8523466977bee531121830f5025" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/sonarlint/issuestore/b/d/bd95e0a8b248754111ee226cb122c4ef89cad7cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/UserssherinjDocumentsSpringboot-Projectsweek2-microserviceslogsaccountservice.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/UserssherinjDocumentsSpringboot-Projectsweek2-microserviceslogscustomerservice.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/java/com/demo/accountservice/AccountserviceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/java/com/demo/accountservice/controller/AccountController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/java/com/demo/accountservice/exceptions/AccountNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/java/com/demo/accountservice/model/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/java/com/demo/accountservice/model/AccountType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/java/com/demo/accountservice/repo/AccountRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/java/com/demo/accountservice/service/AccountService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/java/com/demo/accountservice/service/AccountServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../accountservice/src/test/java/com/demo/accountservice/AccountserviceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/CustomerserviceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/aop/CustomerAspect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/config/CustomerRetryClientConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/config/FeignClientRetryer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/config/MyErrorDecoder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/config/RestConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/controller/CustomerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/exception/CustomerException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/exception/CustomerExistsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/exception/CustomerFeignException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/exception/CustomerNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/feign/AccountFeignClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/feign/HystrixFallbackFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/model/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/model/AccountHolderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/model/AccountType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/model/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/model/Customer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/model/CustomerAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/model/CustomerAllAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/model/CustomerUpdatableData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/repo/CustomerRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/service/CustomerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/customerservice/service/CustomerServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/demo/customerservice/CustomerserviceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/src/main/java/com/example/eurekaserver/eurekaserverdemo/EurekaserverdemoApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../eurekaserverdemo/src/test/java/com/example/eurekaserver/eurekaserverdemo/EurekaserverdemoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/src/main/java/com/example/gateway/gatewaydemo/GatewaydemoApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/src/main/java/com/example/gateway/gatewaydemo/config/RouteConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gatewaydemo/src/test/java/com/example/gateway/gatewaydemo/GatewaydemoApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="25bGiKdR68SRwrvY3MxpQs7TjPX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../eureka-service" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager">
+    <configuration name="CustomerserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="customerservice" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.demo.customerservice.CustomerserviceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="661d4462-4a9b-4f6d-8351-f191328bfe46" name="Changes" comment="" />
+      <created>1645788500635</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645788500635</updated>
+      <workItem from="1645788501943" duration="4009000" />
+      <workItem from="1645847768936" duration="4172000" />
+      <workItem from="1646011304794" duration="10076000" />
+      <workItem from="1646049719698" duration="10757000" />
+      <workItem from="1646110143719" duration="1766000" />
+      <workItem from="1646240535436" duration="424000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
